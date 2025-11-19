@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
   const url = req.query.url;
 
@@ -9,9 +7,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const r = await fetch(url);
-    const txt = await r.text();
-    res.send(txt);
+    const response = await fetch(url);
+    const text = await response.text();
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.send(text);
   } catch (err) {
     res.status(500).send("Gagal mengambil HTML.");
   }
