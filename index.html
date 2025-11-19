@@ -4,16 +4,75 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Login & Dashboard</title>
+
 <style>
-  body { font-family: Arial, sans-serif; background:#3a0066; color:white; margin:0; }
-  .center { max-width:420px; margin:90px auto; background:#4a007f; padding:30px; border-radius:18px; box-shadow:0 0 15px rgba(0,0,0,0.4);}  
-  input,button { width:100%; padding:12px; border:none; border-radius:10px; margin-top:12px; font-size:15px; }
-  input { background:#ffffff; }
-  button { background:#b300ff; color:white; cursor:pointer; }
-  button:hover{opacity:0.8}
-  #dashboard{display:none; padding:20px;}
-  textarea{width:100%; height:260px; margin-top:10px; border-radius:10px; padding:10px;}
-  .box{background:#4a007f; padding:20px; border-radius:15px; margin-bottom:20px;}
+  body { 
+    font-family: Arial, sans-serif; 
+    background:#6A0DAD; /* UNGU CERAH */
+    color:white; 
+    margin:0; 
+  }
+
+  /* CARD LOGIN */
+  .center { 
+    max-width:420px; 
+    margin:90px auto; 
+    background:#7A1CCF; /* UNGU LEBIH MUDA */
+    padding:30px; 
+    border-radius:18px; 
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+  }
+
+  input,button { 
+    width:100%; 
+    padding:12px; 
+    border:none; 
+    border-radius:10px; 
+    margin-top:12px; 
+    font-size:15px; 
+  }
+
+  input { 
+    background:#ffffff; 
+    color:black;
+  }
+
+  button { 
+    background:#B300FF; /* UNGU PINK CERAH */
+    color:white; 
+    cursor:pointer; 
+    font-weight:600;
+  }
+
+  button:hover { opacity:0.85; }
+
+  /* DASHBOARD */
+  #dashboard {
+    display:none; 
+    padding:20px;
+  }
+
+  .box {
+    background:#7A1CCF; /* UNGU MUDA */
+    padding:20px; 
+    border-radius:15px; 
+    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.25);
+  }
+
+  textarea {
+    width:100%; 
+    height:260px; 
+    margin-top:10px; 
+    border-radius:10px; 
+    padding:10px;
+    background:white;
+    color:black;
+    font-size:14px;
+  }
+
+  h2,h3 { margin-top:0; }
+
 </style>
 </head>
 <body>
@@ -41,6 +100,7 @@
       <input id="urlAdmin" placeholder="https://example.com">
       <button onclick="copyHTML('admin')">Ambil HTML</button>
       <textarea id="outAdmin"></textarea>
+      <button onclick="salinKode('admin')">Salin Kode</button>
     </div>
   </div>
 
@@ -50,6 +110,7 @@
       <input id="urlUser" placeholder="https://example.com">
       <button onclick="copyHTML('user')">Ambil HTML</button>
       <textarea id="outUser"></textarea>
+      <button onclick="salinKode('user')">Salin Kode</button>
     </div>
   </div>
 
@@ -107,6 +168,18 @@ async function copyHTML(mode){
     output.value = "Gagal mengambil HTML.";
   }
 }
+
+function salinKode(mode){
+  let textarea = mode==='admin' ? outAdmin : outUser;
+
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+
+  navigator.clipboard.writeText(textarea.value)
+    .then(()=>alert("Kode berhasil disalin!"))
+    .catch(()=>alert("Gagal menyalin."));
+}
 </script>
+
 </body>
-        </html>
+  </html>
